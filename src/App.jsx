@@ -68,8 +68,8 @@ function App() {
       </button>
       {isOpen && (
         <div className="flex flex-col justify-between absolute bottom-full right-0 bg-white border border-gray-300 rounded-t-lg shadow-lg mb-8 chatSize">
-          <div className='border-b border-gray-300 p-4 mb-2'>
-            <p className='font-bold text-gray-900 text-lg'>AgenciaChima Bot</p>
+          <div className='border-b border-gray-300 p-4 mb-2 bg-blue-500 text-white'>
+            <p className='font-bold text-lg'>AgenciaChima Bot</p>
           </div>
           <div className="chatHistorySize overflow-y-auto mb-2 px-2" ref={chatHistoryRef}>
             {chatHistory.map((message, index) => (
@@ -78,7 +78,7 @@ function App() {
                   <div>
                     {message.user && (
                       <div className="flex flex-row justify-end mb-3">
-                        <p className='bg-blue-400 px-2 py-2 rounded-tl-lg rounded-bl-lg rounded-br-lg text-white'>{message.user}</p>
+                        <p className='bg-blue-500 px-2 py-2 rounded-tl-lg rounded-bl-lg rounded-br-lg text-white'>{message.user}</p>
                         <span className='ml-2'><i className="fa-solid fa-user"></i></span>
                       </div>
                     )}
