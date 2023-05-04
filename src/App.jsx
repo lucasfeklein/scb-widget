@@ -1,11 +1,12 @@
 import { Icon } from '@iconify/react';
 import React, { useEffect, useRef, useState } from 'react';
+import { ThreeDots } from 'react-loader-spinner';
 import './index.css';
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState('');
-  const [chatHistory, setChatHistory] = useState([{ user: '', chatbot: 'waiting...' }]);
+  const [chatHistory, setChatHistory] = useState([{ user: '', chatbot: '' }]);
   const chatHistoryRef = useRef(null);
   const ws = useRef(null);
 
@@ -24,7 +25,7 @@ function App() {
     e.preventDefault()
     if (message.length > 0 && ws.current.readyState === WebSocket.OPEN) {
       ws.current.send(message);
-      setChatHistory(prevChatHistory => [...prevChatHistory, { user: message, chatbot: 'waiting...' }]);
+      setChatHistory(prevChatHistory => [...prevChatHistory, { user: message, chatbot: <ThreeDots width={40} height={40} color='#808080' /> }]);
       setMessage('');
     }
   };
@@ -63,7 +64,7 @@ function App() {
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold text-2xl py-2 px-4 rounded-full w-16 h-16"
         onClick={toggleChat}
       >
-        {isOpen ? 'X' : <i class="fa-solid fa-comment"></i>}
+        {isOpen ? 'X' : <i class="fa-solid fa-robot"></i>}
       </button>
       {isOpen && (
         <div className="flex flex-col justify-between absolute bottom-full right-0 bg-gray-100 p-4 border border-gray-300 rounded-t-lg shadow-lg mb-8 chatSize">
