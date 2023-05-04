@@ -54,12 +54,12 @@ function App() {
   }, [chatHistory]);
 
   return (
-    <div className="fixed bottom-0 right-0 m-4">
+    <div className="fixed bottom-1 right-1 m-4">
       <button
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold text-2xl py-2 px-4 rounded-full w-16 h-16"
         onClick={toggleChat}
       >
-        {isOpen ? 'X' : 'Chat'}
+        {isOpen ? 'X' : <i class="fa-solid fa-comment"></i>}
       </button>
       {isOpen && (
         <div className="absolute bottom-full right-0 bg-gray-100 p-4 border border-gray-300 rounded-t-lg shadow-lg mb-8 chatSize">
