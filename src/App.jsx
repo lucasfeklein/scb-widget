@@ -66,7 +66,7 @@ function App() {
         {isOpen ? 'X' : <i class="fa-solid fa-comment"></i>}
       </button>
       {isOpen && (
-        <div className="flex flex-col absolute bottom-full right-0 bg-gray-100 p-4 border border-gray-300 rounded-t-lg shadow-lg mb-8 chatSize">
+        <div className="flex flex-col justify-between absolute bottom-full right-0 bg-gray-100 p-4 border border-gray-300 rounded-t-lg shadow-lg mb-8 chatSize">
           <div className="chatHistorySize overflow-y-auto mb-4 px-2" ref={chatHistoryRef}>
             {chatHistory.map((message, index) => (
               <div key={index} className="text-gray-700">
