@@ -25,7 +25,7 @@ function App() {
     e.preventDefault()
     if (message.length > 0 && ws.current.readyState === WebSocket.OPEN) {
       ws.current.send(message);
-      setChatHistory(prevChatHistory => [...prevChatHistory, { user: message, chatbot: <ThreeDots width={40} height={40} color='#808080' /> }]);
+      setChatHistory(prevChatHistory => [...prevChatHistory, { user: message, chatbot: <ThreeDots width={30} height={30} color='#808080' /> }]);
       setMessage('');
     }
   };
@@ -64,11 +64,14 @@ function App() {
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold text-2xl py-2 px-4 rounded-full w-16 h-16"
         onClick={toggleChat}
       >
-        {isOpen ? 'X' : <i class="fa-solid fa-robot"></i>}
+        {isOpen ? 'X' : <i className="fa-solid fa-robot"></i>}
       </button>
       {isOpen && (
-        <div className="flex flex-col justify-between absolute bottom-full right-0 bg-gray-100 p-4 border border-gray-300 rounded-t-lg shadow-lg mb-8 chatSize">
-          <div className="chatHistorySize overflow-y-auto mb-4 px-2" ref={chatHistoryRef}>
+        <div className="flex flex-col justify-between absolute bottom-full right-0 bg-white border border-gray-300 rounded-t-lg shadow-lg mb-8 chatSize">
+          <div className='border-b border-gray-300 p-4 mb-2'>
+            <p className='font-bold text-gray-900 text-lg'>AgenciaChima Bot</p>
+          </div>
+          <div className="chatHistorySize overflow-y-auto mb-2 px-2" ref={chatHistoryRef}>
             {chatHistory.map((message, index) => (
               <div key={index} className="text-gray-700">
                 {(message.user || message.chatbot) && (
@@ -91,9 +94,9 @@ function App() {
             ))}
           </div>
           <form onSubmit={sendMessage}>
-            <div className="mb-4 relative">
+            <div className="mb-4 relative mx-4">
               <textarea
-                className="shadow border rounded w-full py-2 pl-4 pr-11 text-gray-700 focus:outline-none focus:shadow-outline mt-2 resize-none"
+                className="shadow border rounded w-full py-2 pl-4 pr-11 bg-gray-100 text-gray-700 focus:outline-none focus:shadow-outline mt-2 resize-none"
                 id="message-input"
                 placeholder="Type your message here"
                 value={message}
