@@ -15,7 +15,11 @@ function App() {
 
   const handleMessageChange = (e) => {
     setMessage(e.target.value);
+    e.target.style.height = "44px";
+    e.target.style.height = e.target.scrollHeight + "px";
+    e.target.style.overflowY = e.target.scrollHeight > 120 ? "scroll" : "hidden";
   };
+
   const sendMessage = (e) => {
     e.preventDefault()
     if (message.length > 0 && ws.current.readyState === WebSocket.OPEN) {
@@ -62,7 +66,7 @@ function App() {
         {isOpen ? 'X' : <i class="fa-solid fa-comment"></i>}
       </button>
       {isOpen && (
-        <div className="absolute bottom-full right-0 bg-gray-100 p-4 border border-gray-300 rounded-t-lg shadow-lg mb-8 chatSize">
+        <div className="flex flex-col absolute bottom-full right-0 bg-gray-100 p-4 border border-gray-300 rounded-t-lg shadow-lg mb-8 chatSize">
           <div className="chatHistorySize overflow-y-auto mb-4 px-2" ref={chatHistoryRef}>
             {chatHistory.map((message, index) => (
               <div key={index} className="text-gray-700">
@@ -98,9 +102,10 @@ function App() {
                     sendMessage(e);
                   }
                 }}
+                style={{ height: "44px", maxHeight: '120px' }}
               >
               </textarea>
-              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded text-xl absolute bottom-4 right-2" type="submit"><Icon icon="fe:paper-plane" /></button>
+              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded text-xl absolute bottom-2 right-2" type="submit"><Icon icon="fe:paper-plane" /></button>
             </div>
           </form>
         </div>
