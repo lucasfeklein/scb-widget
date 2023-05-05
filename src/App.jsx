@@ -67,7 +67,7 @@ function App() {
         {isOpen ? 'X' : <i className="fa-solid fa-robot"></i>}
       </button>
       {isOpen && (
-        <div className="flex flex-col justify-between absolute bottom-full right-0 bg-white border border-gray-300 rounded-t-lg shadow-lg mb-8 chatSize rounded-lg overflow-hidden">
+        <div className="flex flex-col justify-between absolute bottom-full right-0 bg-white border border-gray-300 rounded-t-lg shadow-lg mb-5 chatSize rounded-lg overflow-hidden">
           <div className='border-b border-gray-300 p-4 mb-2 bg-blue-500 text-white'>
             <p className='font-bold text-lg'>AgenciaChima Bot</p>
           </div>
