@@ -60,12 +60,15 @@ function App() {
 
   return (
     <div className="fixed bottom-5 right-5">
-      <button
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold text-2xl py-2 px-4 rounded-full w-16 h-16"
-        onClick={toggleChat}
-      >
-        {isOpen ? 'X' : <i className="fa-solid fa-robot"></i>}
-      </button>
+      {!isOpen && <div className='bg-blue-500 text-white rounded-lg p-4 mb-3 cursor-pointer' onClick={toggleChat}><p>Oi! Sou um chat IA.</p><p> Pergunte qualquer coisa.</p></div>}
+      <div className='flex justify-end'>
+        <button
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold text-2xl py-2 px-4 rounded-full w-16 h-16"
+          onClick={toggleChat}
+        >
+          {isOpen ? 'X' : <i className="fa-solid fa-robot"></i>}
+        </button>
+      </div>
       {isOpen && (
         <div className="flex flex-col justify-between absolute bottom-full right-0 bg-white border border-gray-300 rounded-t-lg shadow-lg mb-5 chatSize rounded-lg overflow-hidden">
           <div className='border-b border-gray-300 p-4 mb-2 bg-blue-500 text-white'>
