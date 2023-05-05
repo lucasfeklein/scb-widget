@@ -60,7 +60,11 @@ function App() {
 
   return (
     <div className="fixed bottom-5 right-5">
-      {!isOpen && <div className='bg-blue-500 text-white rounded-lg p-4 mb-3 cursor-pointer' onClick={toggleChat}><p>Oi! Sou um chat IA.</p><p> Pergunte qualquer coisa.</p></div>}
+      {!isOpen && <div className='relative bg-blue-500 text-white rounded-lg p-4 mb-4 cursor-pointer' onClick={toggleChat}>
+        <p>Oi! Sou um chat IA.</p>
+        <p> Pergunte qualquer coisa.</p>
+        <div className='triangle'></div>
+      </div>}
       <div className='flex justify-end'>
         <button
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold text-2xl py-2 px-4 rounded-full w-16 h-16"
