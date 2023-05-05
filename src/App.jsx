@@ -5,6 +5,7 @@ import './index.css';
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
+  const [tooltipIsOpen, setTooltipIsOpen] = useState(true);
   const [message, setMessage] = useState('');
   const [chatHistory, setChatHistory] = useState([{ user: '', chatbot: '' }]);
   const chatHistoryRef = useRef(null);
@@ -12,6 +13,7 @@ function App() {
 
   const toggleChat = () => {
     setIsOpen(!isOpen);
+    setTooltipIsOpen(false)
   };
 
   const handleMessageChange = (e) => {
@@ -60,7 +62,7 @@ function App() {
 
   return (
     <div className="fixed bottom-5 right-5">
-      {!isOpen && <div className='relative bg-blue-500 text-white rounded-lg p-4 mb-4 cursor-pointer' onClick={toggleChat}>
+      {tooltipIsOpen && <div className='relative bg-blue-500 text-white rounded-lg p-4 mb-4 cursor-pointer' onClick={toggleChat}>
         <p>Oi! Sou um chat IA.</p>
         <p> Pergunte qualquer coisa.</p>
         <div className='triangle'></div>
