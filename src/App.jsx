@@ -59,7 +59,7 @@ function App() {
   }, [chatHistory]);
 
   return (
-    <div className="fixed bottom-1 right-1 m-4">
+    <div className="fixed bottom-5 right-5">
       <button
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold text-2xl py-2 px-4 rounded-full w-16 h-16"
         onClick={toggleChat}
