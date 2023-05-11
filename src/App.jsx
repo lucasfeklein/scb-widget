@@ -7,7 +7,7 @@ function App() {
   const [isOpen, setIsOpen] = useState(false);
   const [tooltipIsOpen, setTooltipIsOpen] = useState(true);
   const [message, setMessage] = useState('');
-  const [chatHistory, setChatHistory] = useState([{ user: '', chatbot: '' }]);
+  const [chatHistory, setChatHistory] = useState([{ user: '', chatbot: '', typing: false }]);
   const chatHistoryRef = useRef(null);
   const ws = useRef(null);
 
@@ -27,7 +27,7 @@ function App() {
     e.preventDefault()
     if (message.length > 0 && ws.current.readyState === WebSocket.OPEN) {
       ws.current.send(message);
-      setChatHistory(prevChatHistory => [...prevChatHistory, { user: message, chatbot: <ThreeDots width={30} height={30} color='#808080' /> }]);
+      setChatHistory(prevChatHistory => [...prevChatHistory, { user: message, chatbot: '', typing: true }]);
       setMessage('');
     }
   };
@@ -44,7 +44,8 @@ function App() {
     ws.current.onmessage = (event) => {
       setChatHistory(prevChatHistory => {
         const updatedHistory = [...prevChatHistory];
-        updatedHistory[updatedHistory.length - 1].chatbot = event.data;
+        updatedHistory[updatedHistory.length - 1].chatbot = event.data.replace(/\n/g, '<br>');
+        updatedHistory[updatedHistory.length - 1].typing = false;
         return updatedHistory;
       });
     };
@@ -82,7 +83,7 @@ function App() {
       {isOpen && (
         <div className="flex flex-col justify-between absolute bottom-full right-0 bg-white border border-gray-300 rounded-t-lg shadow-lg mb-5 chatSize rounded-lg overflow-hidden">
           <div className='border-b border-gray-300 p-4 mb-2 bg-blue-500 text-white'>
-            <p className='font-bold text-lg'>AgenciaChima Bot</p>
+            <p className='font-bold text-lg'>Dynamic Bot</p>
           </div>
           <div className="chatHistorySize overflow-y-auto mb-2 px-2" ref={chatHistoryRef}>
             {chatHistory.map((message, index) => (
@@ -95,10 +96,16 @@ function App() {
                         <span className='ml-2'><i className="fa-solid fa-user"></i></span>
                       </div>
                     )}
+                    {message.typing && (
+                      <div className="flex flex-row mb-3">
+                      <span className='mr-2'><i className="fa-solid fa-robot"></i></span>
+                      <p className='bg-gray-200 px-2 py-2 rounded-tr-lg rounded-bl-lg rounded-br-lg'><ThreeDots width={30} height={30} color='#808080' /></p>
+                    </div>
+                    )}
                     {message.chatbot && (
                       <div className="flex flex-row mb-3">
                         <span className='mr-2'><i className="fa-solid fa-robot"></i></span>
-                        <p className='bg-gray-200 px-2 py-2 rounded-tr-lg rounded-bl-lg rounded-br-lg'>{message.chatbot}</p>
+                        <p className='bg-gray-200 px-2 py-2 rounded-tr-lg rounded-bl-lg rounded-br-lg' dangerouslySetInnerHTML={{__html: message.chatbot}}></p>
                       </div>
                     )}
                   </div>
