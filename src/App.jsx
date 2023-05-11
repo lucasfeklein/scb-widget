@@ -35,7 +35,7 @@ function App() {
   const handleTextareaBlur = (e) => {
     e.target.style.height = "44px";
   };
-  
+
   useEffect(() => {
     ws.current = new WebSocket('ws://localhost:3000');
     ws.current.onopen = () => {
@@ -86,6 +86,10 @@ function App() {
             <p className='font-bold text-lg'>Dynamic Bot</p>
           </div>
           <div className="chatHistorySize overflow-y-auto mb-2 px-2" ref={chatHistoryRef}>
+            <div className="flex flex-row mb-3">
+              <span className='mr-2'><i className="fa-solid fa-robot"></i></span>
+              <p className='bg-gray-200 px-2 py-2 rounded-tr-lg rounded-bl-lg rounded-br-lg'>Olá! Como posso ajudar?</p>
+            </div>
             {chatHistory.map((message, index) => (
               <div key={index} className="text-gray-700">
                 {(message.user || message.chatbot) && (
@@ -98,14 +102,14 @@ function App() {
                     )}
                     {message.typing && (
                       <div className="flex flex-row mb-3">
-                      <span className='mr-2'><i className="fa-solid fa-robot"></i></span>
-                      <p className='bg-gray-200 px-2 py-2 rounded-tr-lg rounded-bl-lg rounded-br-lg'><ThreeDots width={30} height={30} color='#808080' /></p>
-                    </div>
+                        <span className='mr-2'><i className="fa-solid fa-robot"></i></span>
+                        <p className='bg-gray-200 px-2 py-2 rounded-tr-lg rounded-bl-lg rounded-br-lg'><ThreeDots width={30} height={30} color='#808080' /></p>
+                      </div>
                     )}
                     {message.chatbot && (
                       <div className="flex flex-row mb-3">
                         <span className='mr-2'><i className="fa-solid fa-robot"></i></span>
-                        <p className='bg-gray-200 px-2 py-2 rounded-tr-lg rounded-bl-lg rounded-br-lg' dangerouslySetInnerHTML={{__html: message.chatbot}}></p>
+                        <p className='bg-gray-200 px-2 py-2 rounded-tr-lg rounded-bl-lg rounded-br-lg' dangerouslySetInnerHTML={{ __html: message.chatbot }}></p>
                       </div>
                     )}
                   </div>
