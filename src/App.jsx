@@ -32,7 +32,10 @@ function App() {
       ws.current.send(message);
       setChatHistory((prevChatHistory) => [
         ...prevChatHistory,
-        { user: message, chatbot: "", typing: true },
+        {
+          user: message,
+          chatbot: <ThreeDots width={30} height={30} color="#808080" />,
+        },
       ]);
       setMessage("");
     }
@@ -50,11 +53,7 @@ function App() {
     ws.current.onmessage = (event) => {
       setChatHistory((prevChatHistory) => {
         const updatedHistory = [...prevChatHistory];
-        updatedHistory[updatedHistory.length - 1].chatbot = event.data.replace(
-          /\n/g,
-          "<br>"
-        );
-        updatedHistory[updatedHistory.length - 1].typing = false;
+        updatedHistory[updatedHistory.length - 1].chatbot = event.data;
         return updatedHistory;
       });
     };
@@ -125,25 +124,14 @@ function App() {
                         </span>
                       </div>
                     )}
-                    {message.typing && (
-                      <div className="flex flex-row mb-3">
-                        <span className="mr-2">
-                          <i className="fa-solid fa-robot"></i>
-                        </span>
-                        <p className="bg-gray-200 px-2 py-2 rounded-tr-lg rounded-bl-lg rounded-br-lg">
-                          <ThreeDots width={30} height={30} color="#808080" />
-                        </p>
-                      </div>
-                    )}
                     {message.chatbot && (
                       <div className="flex flex-row mb-3">
                         <span className="mr-2">
                           <i className="fa-solid fa-robot"></i>
                         </span>
-                        <p
-                          className="bg-gray-200 px-2 py-2 rounded-tr-lg rounded-bl-lg rounded-br-lg"
-                          dangerouslySetInnerHTML={{ __html: message.chatbot }}
-                        ></p>
+                        <p className="bg-gray-200 px-2 py-2 rounded-tr-lg rounded-bl-lg rounded-br-lg whitespace-pre-line">
+                          {message.chatbot}
+                        </p>
                       </div>
                     )}
                   </div>
