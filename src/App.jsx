@@ -51,11 +51,20 @@ function App() {
       console.log("Connected to WebSocket server.");
     };
     ws.current.onmessage = (event) => {
-      setChatHistory((prevChatHistory) => {
-        const updatedHistory = [...prevChatHistory];
-        updatedHistory[updatedHistory.length - 1].chatbot = event.data;
-        return updatedHistory;
-      });
+      const response = event.data;
+      let i = 0;
+      const intervalId = setInterval(() => {
+        setChatHistory((prevChatHistory) => {
+          const updatedHistory = [...prevChatHistory];
+          updatedHistory[updatedHistory.length - 1].chatbot = response.slice(
+            0,
+            i + 1
+          );
+          return updatedHistory;
+        });
+        i++;
+        if (i === response.length) clearInterval(intervalId);
+      }, 20); // adjust the delay as needed
     };
     ws.current.onclose = () => {
       console.log("Disconnected from WebSocket server.");
