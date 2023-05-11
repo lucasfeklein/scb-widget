@@ -35,7 +35,7 @@ function App() {
   const handleTextareaBlur = (e) => {
     e.target.style.height = "44px";
   };
-
+  
   useEffect(() => {
     ws.current = new WebSocket('ws://localhost:3000');
     ws.current.onopen = () => {
@@ -113,7 +113,6 @@ function App() {
                 id="message-input"
                 placeholder="Type your message here"
                 value={message}
-                onBl
                 onChange={handleMessageChange}
                 onBlur={handleTextareaBlur}
                 onKeyDown={(e) => {
