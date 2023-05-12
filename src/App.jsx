@@ -1,5 +1,6 @@
 import { Icon } from "@iconify/react";
 import React, { useEffect, useRef, useState } from "react";
+import { FaRobot, FaUserAlt } from "react-icons/fa";
 import { ThreeDots } from "react-loader-spinner";
 import "./index.css";
 
@@ -83,7 +84,7 @@ function App() {
   }, [chatHistory]);
 
   return (
-    <div className="fixed bottom-5 right-5 z-index-99999">
+    <div className="fixed bottom-5 right-5 z-index-9999">
       {tooltipIsOpen && (
         <div
           className="relative bg-blue-500 text-white rounded-lg p-4 mb-4 cursor-pointer"
@@ -99,7 +100,13 @@ function App() {
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold text-2xl py-2 px-4 rounded-full w-16 h-16"
           onClick={toggleChat}
         >
-          {isOpen ? "X" : <i className="fa-solid fa-robot"></i>}
+          {isOpen ? (
+            "X"
+          ) : (
+            <div className="flex align-center justify-center">
+              <FaRobot className="text-3xl" />
+            </div>
+          )}
         </button>
       </div>
       {isOpen && (
@@ -113,7 +120,7 @@ function App() {
           >
             <div className="flex flex-row mb-3">
               <span className="mr-2">
-                <i className="fa-solid fa-robot"></i>
+                <FaRobot className="text-xl" />
               </span>
               <p className="bg-gray-200 px-2 py-2 rounded-tr-lg rounded-bl-lg rounded-br-lg">
                 Olá! Como posso ajudar?
@@ -129,14 +136,14 @@ function App() {
                           {message.user}
                         </p>
                         <span className="ml-2">
-                          <i className="fa-solid fa-user"></i>
+                          <FaUserAlt className="text-xl" />
                         </span>
                       </div>
                     )}
                     {message.chatbot && (
                       <div className="flex flex-row mb-3">
                         <span className="mr-2">
-                          <i className="fa-solid fa-robot"></i>
+                          <FaRobot className="text-xl" />
                         </span>
                         <p className="bg-gray-200 px-2 py-2 rounded-tr-lg rounded-bl-lg rounded-br-lg whitespace-pre-line">
                           {message.chatbot}
