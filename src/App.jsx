@@ -153,9 +153,9 @@ function App() {
                           {message.chatbot}
                         </ReactMarkdown>
                       ) : (
-                        <p className="prose bg-gray-200 px-2 py-2 rounded-tr-lg rounded-bl-lg rounded-br-lg">
+                        <div className="prose bg-gray-200 px-2 py-2 rounded-tr-lg rounded-bl-lg rounded-br-lg">
                           <ThreeDots width={30} height={30} color="#808080" />
-                        </p>
+                        </div>
                       )}
                     </div>
                   </div>
