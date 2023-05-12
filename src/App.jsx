@@ -3,7 +3,6 @@ import Markdown from "markdown-to-jsx";
 import React, { useEffect, useRef, useState } from "react";
 import { FaRobot, FaUserAlt } from "react-icons/fa";
 import { ThreeDots } from "react-loader-spinner";
-import "./index.css";
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
