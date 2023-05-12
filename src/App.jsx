@@ -46,7 +46,7 @@ function App() {
   };
 
   useEffect(() => {
-    ws.current = new WebSocket("ws:scb-backend-production.up.railway.app");
+    ws.current = new WebSocket("wss:scb-backend-production.up.railway.app");
     ws.current.onopen = () => {
       console.log("Connected to WebSocket server.");
     };
@@ -83,7 +83,7 @@ function App() {
   }, [chatHistory]);
 
   return (
-    <div className="fixed bottom-5 right-5">
+    <div className="fixed bottom-5 right-5 z-index-99999">
       {tooltipIsOpen && (
         <div
           className="relative bg-blue-500 text-white rounded-lg p-4 mb-4 cursor-pointer"
