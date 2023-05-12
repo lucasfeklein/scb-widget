@@ -46,7 +46,7 @@ function App() {
   };
 
   useEffect(() => {
-    ws.current = new WebSocket("ws://localhost:3000");
+    ws.current = new WebSocket("ws:scb-backend-production.up.railway.app");
     ws.current.onopen = () => {
       console.log("Connected to WebSocket server.");
     };
