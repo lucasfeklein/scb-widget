@@ -2,15 +2,15 @@ import { Icon } from "@iconify/react";
 import React, { useEffect, useRef, useState } from "react";
 import { FaRobot, FaUserAlt } from "react-icons/fa";
 import { ThreeDots } from "react-loader-spinner";
+import { ReactMarkdown } from "react-markdown/lib/react-markdown";
+import remarkGfm from "remark-gfm";
 import "./index.css";
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
   const [tooltipIsOpen, setTooltipIsOpen] = useState(true);
   const [message, setMessage] = useState("");
-  const [chatHistory, setChatHistory] = useState([
-    { user: "", chatbot: "", typing: false },
-  ]);
+  const [chatHistory, setChatHistory] = useState([{ user: "", chatbot: "" }]);
   const chatHistoryRef = useRef(null);
   const ws = useRef(null);
 
@@ -35,7 +35,7 @@ function App() {
         ...prevChatHistory,
         {
           user: message,
-          chatbot: <ThreeDots width={30} height={30} color="#808080" />,
+          chatbot: "",
         },
       ]);
       setMessage("");
@@ -140,16 +140,24 @@ function App() {
                         </span>
                       </div>
                     )}
-                    {message.chatbot && (
-                      <div className="flex flex-row mb-3">
-                        <span className="mr-2">
-                          <FaRobot className="text-xl" />
-                        </span>
-                        <p className="bg-gray-200 px-2 py-2 rounded-tr-lg rounded-bl-lg rounded-br-lg whitespace-pre-line">
+
+                    <div className="flex flex-row mb-3">
+                      <span className="mr-2">
+                        <FaRobot className="text-xl" />
+                      </span>
+                      {message.chatbot ? (
+                        <ReactMarkdown
+                          remarkPlugins={[remarkGfm]}
+                          className="prose bg-gray-200 px-2 py-2 rounded-tr-lg rounded-bl-lg rounded-br-lg"
+                        >
                           {message.chatbot}
+                        </ReactMarkdown>
+                      ) : (
+                        <p className="prose bg-gray-200 px-2 py-2 rounded-tr-lg rounded-bl-lg rounded-br-lg">
+                          <ThreeDots width={30} height={30} color="#808080" />
                         </p>
-                      </div>
-                    )}
+                      )}
+                    </div>
                   </div>
                 )}
               </div>
