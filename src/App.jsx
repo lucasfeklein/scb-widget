@@ -1,9 +1,8 @@
 import { Icon } from "@iconify/react";
+import Markdown from "markdown-to-jsx";
 import React, { useEffect, useRef, useState } from "react";
 import { FaRobot, FaUserAlt } from "react-icons/fa";
 import { ThreeDots } from "react-loader-spinner";
-import { ReactMarkdown } from "react-markdown/lib/react-markdown";
-import remarkGfm from "remark-gfm";
 import "./index.css";
 
 function App() {
@@ -146,12 +145,9 @@ function App() {
                         <FaRobot className="text-xl" />
                       </span>
                       {message.chatbot ? (
-                        <ReactMarkdown
-                          remarkPlugins={[remarkGfm]}
-                          className="prose bg-gray-200 px-2 py-2 rounded-tr-lg rounded-bl-lg rounded-br-lg"
-                        >
+                        <Markdown className="prose bg-gray-200 px-2 py-2 rounded-tr-lg rounded-bl-lg rounded-br-lg">
                           {message.chatbot}
-                        </ReactMarkdown>
+                        </Markdown>
                       ) : (
                         <div className="prose bg-gray-200 px-2 py-2 rounded-tr-lg rounded-bl-lg rounded-br-lg">
                           <ThreeDots width={30} height={30} color="#808080" />
