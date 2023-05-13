@@ -66,6 +66,12 @@ display: ${props => (props.isOpen ? "block" : "none")};
   overflow: hidden;
   left: unset;
   margin-bottom: 0.75rem;
+  
+  @media (max-width: 768px) {
+    width: 100%;
+    height: 100vh;
+    max-height: none;
+  }
 `;
 
 function App() {
@@ -79,7 +85,7 @@ function App() {
 
   return (
     <>
-             <ChatFrame src={`http://localhost:3000/widget?hostname=${window.location.hostname}`} isOpen={isOpen} />
+             <ChatFrame src={`https://scb-frontend.vercel.app/widget?hostname=${window.location.hostname}`} isOpen={isOpen} />
 
              <Container>
       {tooltipIsOpen && (
