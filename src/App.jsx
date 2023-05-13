@@ -8,9 +8,9 @@ const Container = styled.div`
   right: 1rem;
   z-index: 9999;
   display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-end;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
 `;
 
 const Tooltip = styled.div`
@@ -18,13 +18,19 @@ const Tooltip = styled.div`
   background-color: #3b82f6;
   color: white;
   border-radius: 0.375rem;
-  padding: 1rem;
+  padding: 0.5rem;
   margin-bottom: 1rem;
+  margin-right: 0.5rem;
   cursor: pointer;
 `;
 
+const ToolttipText = styled.p`
+  padding: 0;
+  margin: 0.5rem;
+`;
+
 const ChatButton = styled.button`
-border: none;
+  border: none;
   background-color: #3b82f6;
   color: white;
   font-weight: bold;
@@ -34,6 +40,7 @@ border: none;
   width: 4rem;
   height: 4rem;
   transition: background-color 0.2s ease;
+  cursor: pointer;
 
   &:hover {
     filter: brightness(1.1);
@@ -47,31 +54,44 @@ border: none;
 `;
 
 const ChatFrame = styled.iframe`
-display: ${props => (props.isOpen ? "block" : "none")};
+  display: ${(props) => (props.isOpen ? "block" : "none")};
   width: 100%;
   height: 100%;
   border: none;
   position: fixed;
   flex-direction: column;
   justify-content: space-between;
-  box-shadow: rgba(150, 150, 150, 0.2) 0px 10px 30px 0px, rgba(150, 150, 150, 0.2) 0px 0px 0px 1px;
+  box-shadow: rgba(150, 150, 150, 0.2) 0px 10px 30px 0px,
+    rgba(150, 150, 150, 0.2) 0px 0px 0px 1px;
   bottom: 5rem;
   right: 1rem;
   width: 448px;
   height: 85vh;
   max-height: 824px;
   border-radius: 0.75rem;
-  display: ${props => (props.isOpen ? "block" : "none")};
+  display: ${(props) => (props.isOpen ? "block" : "none")};
   z-index: 999999999;
   overflow: hidden;
   left: unset;
   margin-bottom: 0.75rem;
-  
+
   @media (max-width: 768px) {
     width: 100%;
     height: 100vh;
     max-height: none;
   }
+`;
+
+const Triangle = styled.div`
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(310%);
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid rgb(59 130 246);
 `;
 
 function App() {
@@ -85,31 +105,30 @@ function App() {
 
   return (
     <>
-             <ChatFrame src={`https://scb-frontend.vercel.app/widget?hostname=${window.location.hostname}`} isOpen={isOpen} />
+      <ChatFrame
+        src={`https://scb-frontend.vercel.app/widget?hostname=${window.location.hostname}`}
+        isOpen={isOpen}
+      />
 
-             <Container>
-      {tooltipIsOpen && (
-        <Tooltip onClick={toggleChat}>
-          <p>Oi! Sou um chat IA.</p>
-          <p> Pergunte qualquer coisa.</p>
-        </Tooltip>
-      )}
-      <ChatButton onClick={toggleChat}>
-        {isOpen ? (
-          "X"
-        ) : (
-          <div className="icon">
-            <FaRobot className="text-3xl" />
-          </div>
+      <Container>
+        {tooltipIsOpen && (
+          <Tooltip onClick={toggleChat}>
+            <ToolttipText>Oi! Sou um chat IA.</ToolttipText>
+            <ToolttipText> Pergunte qualquer coisa.</ToolttipText>
+            <Triangle />
+          </Tooltip>
         )}
-      </ChatButton>
-
-      
-
-
-    </Container>
+        <ChatButton onClick={toggleChat}>
+          {isOpen ? (
+            "X"
+          ) : (
+            <div className="icon">
+              <FaRobot className="text-3xl" />
+            </div>
+          )}
+        </ChatButton>
+      </Container>
     </>
-   
   );
 }
 
