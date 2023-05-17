@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaRobot } from "react-icons/fa";
+import { BsFillChatFill } from "react-icons/bs";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -15,7 +15,7 @@ const Container = styled.div`
 
 const Tooltip = styled.div`
   position: relative;
-  background-color: #3b82f6;
+  background-color: #2563eb;
   color: white;
   border-radius: 0.375rem;
   padding: 0.5rem;
@@ -31,7 +31,7 @@ const ToolttipText = styled.p`
 
 const ChatButton = styled.button`
   border: none;
-  background-color: #3b82f6;
+  background-color: #2563eb;
   color: white;
   font-weight: bold;
   font-size: 2rem;
@@ -91,7 +91,7 @@ const Triangle = styled.div`
   height: 0;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
-  border-top: 10px solid rgb(59 130 246);
+  border-top: 10px solid #2563eb;
 `;
 
 function App() {
@@ -123,7 +123,7 @@ function App() {
             "X"
           ) : (
             <div className="icon">
-              <FaRobot className="text-3xl" />
+              <BsFillChatFill className="text-3xl" />
             </div>
           )}
         </ChatButton>
