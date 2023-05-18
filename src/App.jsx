@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { AiOutlineClose } from "react-icons/ai";
 import { BsFillChatFill } from "react-icons/bs";
 import styled from "styled-components";
 
@@ -11,9 +12,15 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: flex-end;
+
+  @media (max-width: 768px) {
+    display: ${(props) => (props.isOpen ? "none" : "flex")};
+  }
 `;
 
 const Tooltip = styled.div`
+  font-family: "Inter", sans-serif;
+  font-size: 0.9rem;
   position: relative;
   background-color: #2563eb;
   color: white;
@@ -70,7 +77,7 @@ const ChatFrame = styled.iframe`
   max-height: 824px;
   border-radius: 0.75rem;
   display: ${(props) => (props.isOpen ? "block" : "none")};
-  z-index: 999999999;
+  z-index: 99999;
   overflow: hidden;
   left: unset;
   margin-bottom: 0.75rem;
@@ -78,7 +85,11 @@ const ChatFrame = styled.iframe`
   @media (max-width: 768px) {
     width: 100%;
     height: 100vh;
+    right: 0;
+    bottom: 0;
+    margin-bottom: 0;
     max-height: none;
+    border-radius: 0;
   }
 `;
 
@@ -94,6 +105,29 @@ const Triangle = styled.div`
   border-top: 10px solid #2563eb;
 `;
 
+const CloseButton = styled.button`
+  display: none;
+
+  @media (max-width: 768px) {
+    display: flex;
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    border: none;
+    border-radius: 50%;
+    background-color: transparent;
+    color: white;
+    font-size: 1.3rem;
+    padding: 0.3rem;
+    cursor: pointer;
+    z-index: 9999999;
+
+    &:hover {
+      background-color: #3b82f6;
+    }
+  }
+`;
+
 function App() {
   const [isOpen, setIsOpen] = useState(false);
   const [tooltipIsOpen, setTooltipIsOpen] = useState(true);
@@ -105,12 +139,16 @@ function App() {
 
   return (
     <>
+      {isOpen && (
+        <CloseButton onClick={toggleChat}>
+          <AiOutlineClose />
+        </CloseButton>
+      )}
       <ChatFrame
         src={`https://scb-frontend.vercel.app/widget?hostname=${window.location.hostname}`}
         isOpen={isOpen}
       />
-
-      <Container>
+      <Container isOpen={isOpen}>
         {tooltipIsOpen && (
           <Tooltip onClick={toggleChat}>
             <ToolttipText>Oi! Sou um chat IA.</ToolttipText>
@@ -120,7 +158,9 @@ function App() {
         )}
         <ChatButton onClick={toggleChat}>
           {isOpen ? (
-            "X"
+            <div className="icon">
+              <AiOutlineClose className="text-3xl" />
+            </div>
           ) : (
             <div className="icon">
               <BsFillChatFill className="text-3xl" />
