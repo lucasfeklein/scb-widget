@@ -145,7 +145,7 @@ function App() {
         </CloseButton>
       )}
       <ChatFrame
-        src={`https://scb-frontend.vercel.app/widget?hostname=${window.location.hostname}`}
+        src={`${import.meta.env.VITE_FRONTEND_URL}/widget?hostname=${window.location.hostname}`}
         isOpen={isOpen}
       />
       <Container isOpen={isOpen}>
