@@ -4,7 +4,7 @@ Powered by Artificial Intelligence from OpenAi.
 
 An intelligent Chatbot that extracts information from a client's website and delivers well-structured, highly efficient, and pinpoint accurate responses. Embedding this Chatbot onto a client's website is as simple as copying and pasting a script tag.
 
-## Links for the Frontend and Widget
+## Links for the Frontend and Backend
 
 - [scb-frontend](https://github.com/lucasfeklein/scb-frontend)
 - [scb-backend](https://github.com/lucasfeklein/scb-backend)
